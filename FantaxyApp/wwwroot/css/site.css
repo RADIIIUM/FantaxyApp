@@ -1,0 +1,44 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.styleh1 {
+    font-family: 'Sansation Light', sans-serif;
+    font-size: calc(var(--index) * 2);
+    text-align: center;
+    color: white;
+    font-weight: 300;
+    margin-top: 150px;
+}
+
+.fontsansation {
+    font-family: 'Sansation Light', sans-serif;
+    font-size: calc(var(--index) * 1);
+    text-align: center;
+    color: white;
+    font-weight: 300;
+}
+
+
+:root {
+    --index: calc(1vw + 1vh);
+}
+
+
+@font-face {
+    font-family: "Sansation Light";
+    src: url("../fonts/sansation-light.woff2") format("woff2"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}

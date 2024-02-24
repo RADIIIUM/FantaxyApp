@@ -1,0 +1,44 @@
+﻿@model FantaxyApp.Models.DB.User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Авторизация</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/autorization.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div>
+        <img class="img1" src="~/images/FantaxyBigIcon.png" />
+    </div>
+    <div>
+        <img class="img2" src="~/images/alien/Alien1.png" />
+    </div>
+    <form method="get" asp-controller="Home" asp-action="SignUp">
+    <div class="maindiv">
+            <label class="styleh1"> АВТОРИЗАЦИЯ </label>
+        <div class="inputwin">
+                @Html.EditorFor(model => model.UserLogin)
+                @Html.ValidationMessage("LoginError")
+        <label class="fontsansation"> Логин </label>
+                @Html.EditorFor(model => model.UserPassword)
+                @Html.ValidationMessage("PasswordError")
+        <label class="fontsansation"> Пароль </label>
+                <input class="submitbtn" type="submit" value="SIGN UP" />
+        </div>
+            <div class="inputwin2">
+                <a class="nav-link text-light" asp-area="" asp-controller="Registration" asp-action="Index">Регистрация</a>
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Registration">Забыли пароль?</a>
+            </div>
+        
+    </div>
+    </form>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

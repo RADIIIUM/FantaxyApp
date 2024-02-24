@@ -1,0 +1,183 @@
+﻿a {
+    color: white;
+}
+
+.img1 {
+    display: flex;
+    width: calc(var(--index) * 22);
+    height: calc(var(--index) * 22);
+    display: inline-block;
+    margin-left:auto;
+    margin-right:auto;
+    float:right;
+    margin-top: 35px;
+}
+
+@media (max-width: 750px) {
+    .img1 {
+       display:block;
+       float:none;
+       margin-top:0px;
+    }
+    .maindiv {
+        text-align: center;
+        display: inline;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .img2 {
+        display: block;
+        margin-left: 0px;
+        margin-right: auto;
+        float: none;
+        margin-top: 0px;
+    }
+
+}
+
+.img2 {
+    display: flex;
+    width: calc(var(--index) * 10);
+    height: calc(var(--index) * 10);
+    display: inline-block;
+    margin-left: -120px;
+    margin-right: auto;
+    float: left;
+    margin-top: 355px;
+}
+
+body {
+    left: 0;
+    right: 0; /* Вся ширин */
+    top: 0;
+    bottom: 0; /* Вся высота */
+    z-index: -1; /* Фон ниже текста */
+    /* Параметры фона */
+    background: url(/images/MainBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.maindiv {
+    text-align: center;
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .maindiv label {
+        display: block;
+    }
+
+    .maindiv .inputwin {
+        margin-top: 50px;
+        margin-bottom: 15px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.inputwin input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(var(--index) * 20);
+    border-color: transparent;
+    background-color: transparent;
+    border-bottom-color: white;
+    font-family: "Sansation Light";
+    color: white;
+}
+
+.inputwin label {
+    text-align: left;
+}
+
+.inputwin input {
+    border-color: transparent;
+    background-color: transparent;
+    border-bottom-color: white;
+}
+
+.inputwin .styleh1 {
+    margin-bottom: 50px;
+}
+
+.inputwin .submitbtn {
+    background-color: #AD00FF;
+    width: calc(var(--index) * 10);
+    height: calc(var(--index) * 3);
+    font-size: calc(var(--index) * 1.2);
+    border-color: transparent;
+    transition: transform 1s;
+    border-radius: 30px;
+    display: block;
+    margin-top: 15px;
+}
+
+    .inputwin .submitbtn:hover {
+        transform: scale(1.1);
+        background-color: #FF00F5;
+        font-size: calc(var(--index) * 1.2);
+        border-color: transparent;
+        font-weight: 400;
+    }
+
+.inputwin2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .inputwin2 a {
+        font-family: "Sansation Light";
+        color: white;
+        font-weight: 300;
+        display: inline-block;
+        margin-inline: 60px;
+        transition: linear 0.5s;
+    }
+
+        .inputwin2 a:hover {
+            font-size: calc(var(--index) * 0.9);
+            font-family: "Sansation Light";
+            color: white;
+            font-weight: 300;
+            display: inline-block;
+            margin-inline: 60px;
+        }
+
+        .inputwin2 a:active {
+            color: white;
+        }
+
+        .inputwin2 a:visited {
+            color: white;
+        }
+
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #f00;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

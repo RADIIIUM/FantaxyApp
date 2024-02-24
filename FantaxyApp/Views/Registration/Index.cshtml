@@ -1,0 +1,63 @@
+﻿@model FantaxyApp.Models.DB.User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Регистрация</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/registration.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    @if (ViewData["ShowAlert"] != null && (bool)ViewData["ShowAlert"])
+    {
+        <script>
+            alert('@Html.Raw(ViewData["Message"])');
+        </script>
+    }
+    <nav>
+        <img class="icon" src="~/images/FantaxyIcon.png" />
+    </nav>
+    <form method="post" asp-controller="Registration" asp-action="UploadImage" enctype="multipart/form-data">
+        @if (ViewBag.Avatar != null)
+        {
+            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Avatar))" />
+        }
+        else
+        {
+            <img class="ava" src="~/images/stdAvatar.png" />
+        }
+        <input type="file" id="avaFile" name="Avatar" style="display: none;" />
+        <input class="submitbtnimg" type="submit" value="UploadImage" accept="image/png, image/jpeg" />
+
+    </form>
+    <form method="post" asp-controller="Registration" asp-action="Registration">
+            <div class="inputwin">
+                <label class="styleh1"> РЕГИСТРАЦИЯ </label>
+                <label class="success"> @ViewBag.Success </label>
+                @Html.EditorFor(model => model.UserLogin)
+                @Html.ValidationMessageFor(model => model.UserLogin)
+                <label class="fontsansation"> Логин </label>
+                @Html.EditorFor(model => model.UserPassword)
+                @Html.ValidationMessageFor(model => model.UserPassword)
+                <label class="fontsansation"> Пароль </label>
+                @Html.EditorFor(model => model.UserEmail)
+                @Html.ValidationMessageFor(model => model.UserEmail)
+                <label class="fontsansation"> Email </label>
+                <input class="submitbtn" type="submit" value="REGISTRATION" />
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Авторизация</a>
+            </div>
+    </form>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        document.getElementsByClassName('ava').addEventListener('click', function () {
+            document.getElementById('avaFile').click();
+        });
+        </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

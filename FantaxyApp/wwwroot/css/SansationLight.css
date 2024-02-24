@@ -1,0 +1,7 @@
+﻿@font-face {
+    font-family: "SansationLight";
+    src: url("../fonts/SansationLight/SansationLight.eot");
+    src: url("../fonts/SansationLight/SansationLight.eot?#iefix")format("embedded-opentype"), url("../fonts/SansationLight/SansationLight.woff") format("woff"), url("../fonts/SansationLight/SansationLight.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 300;
+}
