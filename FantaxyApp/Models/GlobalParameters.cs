@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FantaxyApp.Models.DB;
+using Microsoft.AspNetCore.Identity;
 using System.Net.NetworkInformation;
 
-namespace FantaxyApp.Models.DB
+namespace FantaxyApp.Models
 {
     public partial class GlobalParameters
     {
-        public static string UserLogin { get; set; }
+        public static User Users { get; set; }
+
+        public static UsersInfo UserInfo { get; set; }
         public static string UserRole { get; set; }
     }
 }

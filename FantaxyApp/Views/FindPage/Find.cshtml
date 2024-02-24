@@ -13,26 +13,71 @@
     <link rel="stylesheet" href="~/css/navigation.css" />
 </head>
 <body>
+    <nav class ="nav">
+        <div class="maindiv1">
 
-    <nav>
-        <div class="planets">
-            <img src="~/images/Planet.png"/>
-        </div>
+            <div class="planets">
+                <button>
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
 
-        <div class="profile">
-            @using (FantaxyDBContext db = new FantaxyDBContext())
-            {
-                @if (ViewBag.Avatar != null)
-                {
-                    <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Avatar))" />
-                }
-            }
+                <img src="~/images/Planet.png"/>
+                <img src="~/images/Planet.png" />
+            </div>
+
+            <div class="profile">
+                <form methood="get" asp-controller="MainProfile" asp-action="Profile">
+                    @using (FantaxyDBContext db = new FantaxyDBContext())
+                    {
+                        @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
+                        {
+                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))"/>
+                            <input type="submit" id="avaBtn" hidden />
+                        }
+                    }
+                </form>
+            </div>
         </div>
     </nav>
-    
+              <div class="maindiv">
+                  <div class="find">
+                      <form>
+                        <button>
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+                        </button>
+                        <input class="text" type="text" />
+                    <input hidden type="submit" />
+                    
+                        </form>
+                  
+                  </div>
+
+                    <div>
+                        <div class="filter">
+                            <button>
+                    <span> Пользователи </span>
+                </button>
+                <button>
+                    <span> Планеты </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        const avaImg = document.querySelector('.ava');
+        const avaBtn = document.getElementById('avaBtn');
+
+        avaImg.addEventListener('click', function () {
+            avaBtn.click();
+        });
+    </script>
 </body>
 </html>
 

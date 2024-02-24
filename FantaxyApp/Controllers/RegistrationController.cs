@@ -2,6 +2,7 @@
 using System.Web;
 using System.IO;
 using FantaxyApp.Models.DB;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace FantaxyApp.Controllers
 {
@@ -60,10 +61,15 @@ namespace FantaxyApp.Controllers
                 {
                     ui.UserLogin = u.UserLogin;
                     ui.UserName = u.UserLogin;
-                    ui.Avatar = System.IO.File.ReadAllBytes("./stdAvatar.png");
+                    ui.Avatar = System.IO.File.ReadAllBytes("wwwroot/images/stdAvatar.png");
                 }
+                RolesUser ru = new RolesUser();
+                ru.IdRole = 4;
+                ru.UserLogin = u.UserLogin;
 
                 db.Users.Add(u);
+                db.RolesUsers.Add(ru);
+                db.UsersInfos.Add(ui);
                 ViewBag.Success = $"Пользователь {u.UserLogin} успешно создан!";
                 db.SaveChanges();
             }

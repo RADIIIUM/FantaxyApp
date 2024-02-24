@@ -1,8 +1,12 @@
 ﻿using FantaxyApp.Models;
 using FantaxyApp.Models.DB;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.VisualBasic;
 
 namespace FantaxyApp.Controllers
 {
@@ -15,12 +19,28 @@ namespace FantaxyApp.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var obj = Request.Cookies["Login"];
+            if (obj == null)
+            {
+                return View();
+            }
+            else
+            {
+                using (FantaxyDBContext db = new FantaxyDBContext())
+                {
+                    string role = db.Roles.FirstOrDefault(x => x.IdRole == (db.RolesUsers.FirstOrDefault(y => y.UserLogin == obj).IdRole)).RoleName;
+                    GlobalParameters.Users = db.Users.FirstOrDefault(x => x.UserLogin == obj); ;
+                    GlobalParameters.UserInfo = db.UsersInfos.FirstOrDefault(x => x.UserLogin == obj);
+                    GlobalParameters.UserRole = role;
+                }
+                return Redirect("/FindPage/Find");
+            }
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult SignUp(User user)
         {
             if (string.IsNullOrEmpty(user.UserLogin))
@@ -35,13 +55,24 @@ namespace FantaxyApp.Controllers
             }
             using (FantaxyDBContext db = new FantaxyDBContext())
             {
+
                 User us = db.Users.FirstOrDefault(x => x.UserLogin == user.UserLogin && x.UserPassword == user.UserPassword);
+               
                 if (us == null)
                 {
                     ModelState.AddModelError("LoginError", "Неверный логин или пароль");
                     ModelState.AddModelError("PasswordError", "Неверный логин или пароль");
                     return View("Index");
                 }
+                string role = db.Roles.FirstOrDefault(x => x.IdRole == (db.RolesUsers.FirstOrDefault(y => y.UserLogin == user.UserLogin).IdRole)).RoleName;
+                GlobalParameters.Users = user;
+                GlobalParameters.UserInfo = db.UsersInfos.FirstOrDefault(x => x.UserLogin == user.UserLogin);
+                GlobalParameters.UserRole = role;
+
+                CookieOptions obj = new CookieOptions();
+                obj.Expires = DateAndTime.Now.Add(new TimeSpan(7, 0, 0, 0, 0));
+                Response.Cookies.Append("Login", user.UserLogin, obj);
+
             }
             return Redirect("/FindPage/Find");
         }
@@ -51,5 +82,6 @@ namespace FantaxyApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

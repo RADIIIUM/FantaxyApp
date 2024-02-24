@@ -36,7 +36,7 @@
     <form method="post" asp-controller="Registration" asp-action="Registration">
             <div class="inputwin">
                 <label class="styleh1"> РЕГИСТРАЦИЯ </label>
-                <label class="success"> @ViewBag.Success </label>
+                <label id="success"> @ViewBag.Success </label>
                 @Html.EditorFor(model => model.UserLogin)
                 @Html.ValidationMessageFor(model => model.UserLogin)
                 <label class="fontsansation"> Логин </label>

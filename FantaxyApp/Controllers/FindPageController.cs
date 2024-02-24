@@ -16,13 +16,11 @@ namespace FantaxyApp.Controllers
         {
             return View();
         }
-        public IActionResult Users()
+
+        [HttpGet]
+        public IActionResult Profile()
         {
-            return View();
-        }
-        public IActionResult Planets()
-        {
-            return View();
+            return Redirect("/MainProfile/Profile");
         }
     }
 }
