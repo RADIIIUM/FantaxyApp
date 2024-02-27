@@ -1,0 +1,62 @@
+﻿@using FantaxyApp.Models.DB;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fantaxy </title>
+    <link rel="stylesheet" href="~/css/planets/entrance.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/navigation.css" />
+</head>
+<body>
+    <nav class="nav">
+        <div class="maindiv1">
+
+            <div class="planets">
+                <a asp-controller="FindPage" asp-action="Find">
+                    <button>
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                </a>
+
+                <img src="~/images/Planet.png" />
+                <img src="~/images/Planet.png" />
+            </div>
+
+            <div class="profile">
+                <form methood="get" asp-controller="MainProfile" asp-action="Profile">
+                    @using (FantaxyDBContext db = new FantaxyDBContext())
+                    {
+                        @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
+                        {
+                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))" />
+                            <input type="submit" id="avaBtn" hidden />
+                        }
+                    }
+                </form>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <h1>FANTASY LITERATURE</h1>
+        <p>#FANTASY #LITERATURE</p>
+    </header>
+    <main>
+        <section>
+            <h2>Participants: 999 999 999</h2>
+            <p>Public</p>
+            <button>Join</button>
+        </section>
+        <section>
+            <h3>Description</h3>
+            <!-- Add more detailed descriptions here -->
+        </section>
+    </main>
+</body>
+</html>

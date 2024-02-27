@@ -1,0 +1,182 @@
+﻿@using FantaxyApp.Controllers;
+@using FantaxyApp.Models.DB;
+@model FantaxyApp.Models.DB.UsersInfo
+
+
+@{
+    string replacedText = Url.Action("ReplaceImageTags", "Image", new { input = GlobalParameters.UserInfo.UserDesc }).ToString();
+    string back1;
+    MainProfileController mp = new MainProfileController();
+    string back2;
+    if (ViewBag.mainimage != null)
+    {
+        back1 = $"url('data:image/jpeg;base64,{(Convert.ToBase64String(ViewBag.mainimage))}')";
+    }
+    else
+    {
+        back1 = "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,119,1) 47%, rgba(2,0,36,1) 100%)";
+    }
+
+    if (ViewBag.secondimage != null)
+    {
+        back2 = $"url('data:image/jpeg; base64,{(Convert.ToBase64String(ViewBag.secondimage))}')";
+    }
+    else
+    {
+        back2 = "radial-gradient(circle, rgba(255,0,181,1) 0%, rgba(217,0,59,1) 47%, rgba(36,0,0,1) 100%)";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Изменить профиль</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/navigation.css" />
+</head>
+<body>
+    @if (ViewData["ShowAlert"] != null && (bool)ViewData["ShowAlert"])
+    {
+        <script>
+            alert('@Html.Raw(ViewData["Message"])');
+        </script>
+    }
+    <style>
+
+        body {
+            background-image: @Html.Raw(back1);
+            left: 0;
+            right: 0; /* Вся ширин */
+            top: 0;
+            bottom: 0; /* Вся высота */
+            z-index: -1; /* Фон ниже текста */
+            /* Параметры фона */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .maindiv .profilediv {
+            background-image: @Html.Raw(back2);
+            padding-bottom: 50px;
+            margin-bottom: 20px;
+            display: block;
+            width: 100vw;
+        }
+    </style>
+    <nav class="nav">
+        <div class="maindiv1">
+
+            <div class="planets">
+                <button>
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+
+                <img src="~/images/Planet.png" />
+                <img src="~/images/Planet.png" />
+            </div>
+
+            <div class="profile">
+                <form methood="get" asp-controller="MainProfile" asp-action="Profile">
+                    @using (FantaxyDBContext db = new FantaxyDBContext())
+                    {
+                        @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
+                        {
+                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))" />
+                            <input type="submit" id="avaBtn" hidden />
+                        }
+                    }
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="maindiv">
+        <a class="editprofile">
+            <span class="material-symbols-outlined">
+                edit
+            </span>
+        </a>
+
+        @* Загрузить фоновые картинки  *@
+        <form asp-controller="MainProfile" asp-action="DonwloadMainImage" method="post" id="mainForm" enctype="multipart/form-data">
+            <label class="file-input-label" for="mainFile">Гл. изображение</label>
+            <input type="file" id="mainFile" name="mainImage" value="Гл. изображение " />
+         
+        </form>
+
+        <form method="post" asp-controller="MainProfile" asp-action="DonwloadSecondImage" id="secondForm" enctype="multipart/form-data">
+            <label class="file-input-label" for="secondFile">Профильное изображение</label>
+            <input type="file" id="secondFile" name="secondImage" value="Профильное изображение " />
+        </form>
+
+        @* Аватар и прочее  *@       
+            <div class="profilediv">
+            <form method="post" asp-controller="MainProfile" asp-action="DonwloadAvatar" enctype="multipart/form-data">
+                    @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
+                    {
+                    if (ViewBag.avatar != null)
+                        {
+                        <img class="avamain" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.avatar))" />
+                        }
+                        else
+                        {
+                            <img class="avamain" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))" />
+                        }
+
+                    }
+                 <input type="file" id="avaFile" name="avatarImage" style="display: none;" />
+                    <input class="submitbtnimg" type="submit" value="UploadImage" accept="image/png, image/jpeg" />
+                </form>
+                <h1 id="heading"> @GlobalParameters.UserInfo.UserName </h1>
+                <h2> @GlobalParameters.UserRole </h2>
+        </div>
+        <form method="post" asp-action="Save">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+
+@*             @Html.Editor("Email", )
+            @Html.ValidationMessageFor(model => model.UserEmail) *@
+        <input name="UserName" type="text" value="@GlobalParameters.UserInfo.UserName" placeholder="Имя пользователя" />
+        <input name="UserEmail" type="text" value="@GlobalParameters.UserInfo.UserName" placeholder="Email" />
+        <textarea wrap="soft" name="Desc"> @replacedText </textarea>
+        <input type="submit" class="submitbtnimg" value="Сохранить" />  
+        </form>
+            
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        document.getElementById('UserName').addEventListener('input', function () {
+            document.getElementById('heading').textContent = this.value;
+        });
+    </script>
+    <script>
+            document.getElementsByClassName('avamain').addEventListener('click', function () {
+            document.getElementById('avaFile').click();
+        });
+    </script>
+
+        <script>
+                document.getElementById('secondFile').addEventListener('change', function () {
+                document.getElementById('secondForm').submit();
+            });
+    </script>
+
+        <script>
+                document.getElementById('mainFile').addEventListener('change', function () {
+                document.getElementById('mainForm').submit();
+            });
+        </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FantaxyApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,12 @@ namespace FantaxyApp.Controllers
 
         [HttpGet]
         public IActionResult Profile()
+        {
+            return Redirect("/MainProfile/Profile");
+        }
+
+        [HttpPost]
+        public IActionResult EditProfile()
         {
             return Redirect("/MainProfile/Profile");
         }

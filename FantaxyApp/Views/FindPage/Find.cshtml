@@ -13,17 +13,21 @@
     <link rel="stylesheet" href="~/css/navigation.css" />
 </head>
 <body>
-    <nav class ="nav">
+    <nav class="nav">
         <div class="maindiv1">
 
             <div class="planets">
-                <button>
-                    <span class="material-symbols-outlined">
-                        search
-                    </span>
-                </button>
+                <a asp-controller="FindPage" asp-action="Find">
+                    <button>
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                </a>
 
-                <img src="~/images/Planet.png"/>
+                <a asp-controller="Planets" asp-action="Enter">
+                    <img src="~/images/Planet.png" />
+                </a>
                 <img src="~/images/Planet.png" />
             </div>
 
@@ -33,7 +37,7 @@
                     {
                         @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
                         {
-                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))"/>
+                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))" />
                             <input type="submit" id="avaBtn" hidden />
                         }
                     }

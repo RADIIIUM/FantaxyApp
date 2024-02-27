@@ -1,0 +1,122 @@
+﻿@using FantaxyApp.Controllers;
+@using FantaxyApp.Models.DB;
+@model FantaxyApp.Models.DB.PlanetInfo
+
+
+@{
+    string replacedText = Url.Action("ReplaceImageTags", "Image", new { input = GlobalParameters.UserInfo.UserDesc }).ToString();
+    string back1;
+    MainProfileController mp = new MainProfileController();
+    string back2;
+    if (ViewBag.mainimage != null)
+    {
+        back1 = $"url('data:image/jpeg;base64,{(Convert.ToBase64String(ViewBag.mainimage))}')";
+    }
+    else
+    {
+        back1 = "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,119,1) 47%, rgba(2,0,36,1) 100%)";
+    }
+
+    if (ViewBag.secondimage != null)
+    {
+        back2 = $"url('data:image/jpeg; base64,{(Convert.ToBase64String(ViewBag.secondimage))}')";
+    }
+    else
+    {
+        back2 = "radial-gradient(circle, rgba(255,0,181,1) 0%, rgba(217,0,59,1) 47%, rgba(36,0,0,1) 100%)";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Изменить профиль</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/navigation.css" />
+</head>
+<body>
+    @if (ViewData["ShowAlert"] != null && (bool)ViewData["ShowAlert"])
+    {
+        <script>
+            alert('@Html.Raw(ViewData["Message"])');
+        </script>
+    }
+    <nav class="nav">
+        <div class="maindiv1">
+
+            <div class="planets">
+                <a asp-controller="FindPage" asp-action="Find">
+                    <button>
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                </a>
+
+                <a asp-controller="Planets" asp-action="Enter">
+                    <img src="~/images/Planet.png" />
+                </a>
+                <img src="~/images/Planet.png" />
+            </div>
+
+            <div class="profile">
+                <form methood="get" asp-controller="MainProfile" asp-action="Profile">
+                    @using (FantaxyDBContext db = new FantaxyDBContext())
+                    {
+                        @if (GlobalParameters.Users != null && GlobalParameters.UserInfo != null)
+                        {
+                            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(GlobalParameters.UserInfo.Avatar))" />
+                            <input type="submit" id="avaBtn" hidden />
+                        }
+                    }
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <form method="post" asp-controller="Registration" asp-action="UploadImage" enctype="multipart/form-data">
+        @if (ViewBag.Avatar != null)
+        {
+            <img class="ava" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Avatar))" />
+        }
+        else
+        {
+            <img class="ava" src="~/images/stdAvatar.png" />
+        }
+        <input type="file" id="avaFile" name="Avatar" style="display: none;" />
+        <input class="submitbtnimg" type="submit" value="UploadImage" accept="image/png, image/jpeg" />
+
+    </form>
+    <form method="post" asp-controller="Registration" asp-action="Registration">
+        <div class="inputwin">
+            <label class="styleh1"> СОЗДАЙТЕ СВОЙ МИР!! </label>
+            <label id="success"> @ViewBag.Success </label>
+            @Html.EditorFor(model => model.PlanetName);
+            @Html.ValidationMessageFor(model => model.PlanetName)
+            <label class="fontsansation"> Название планеты </label>
+            <textarea wrap= "soft"></textarea>
+            @Html.ValidationMessageFor(model => model.Desciption);
+            <label class="fontsansation"> Пароль </label>
+@*             @Html.EditorFor(model => model.UserEmail)
+            @Html.ValidationMessageFor(model => model.UserEmail) *@
+            <label class="fontsansation"> Email </label>
+            <input class="submitbtn" type="submit" value="REGISTRATION" />
+            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Авторизация</a>
+        </div>
+    </form>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        document.getElementsByClassName('ava').addEventListener('click', function () {
+            document.getElementById('avaFile').click();
+        });
+    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</body>
+</html>
+

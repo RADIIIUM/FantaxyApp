@@ -1,0 +1,276 @@
+﻿a {
+    color: white;
+}
+
+.avamain {
+    max-width: calc(var(--index) * 20);
+    max-height: calc(var(--index) * 20);
+    width: 350px;
+    height: 350px;
+    margin: 30px;
+    margin-bottom: 5px;
+}
+
+.maindiv h1 {
+    color: white;
+    margin-top: 5px;
+    font-family: 'Sansation Light';
+    text-shadow: 0px 0px 10px black;
+}
+
+.maindiv h2 {
+    color: white;
+    margin-top: 10px;
+    font-family: 'Sansation Light';
+    font-size: 30px;
+    background: #FF00F5;
+    width: max-content;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.file-input-label {
+    color: white;
+    top: 30px;
+    display: block;
+    text-align: center;
+    font-family: 'Sansation Light', sans-serif;
+    text-shadow: 0px 0px 10px black;
+    background: black;
+    width: max-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mainFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#secondFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.savebtn {
+
+}
+
+.submitbtnimg {
+    background-color: #AD00FF;
+    width: calc(var(--index) * 10);
+    height: calc(var(--index) * 3);
+    font-size: calc(var(--index) * 1.2);
+    border-color: transparent;
+    transition: transform 1s;
+    border-radius: 30px;
+    margin-top: 15px;
+    color: white;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .submitbtnimg:hover {
+        transform: scale(1.1);
+        background-color: #FF00F5;
+        font-size: calc(var(--index) * 1.2);
+        border-color: transparent;
+        font-weight: 400;
+    }
+
+.maindiv textarea {
+    background: transparent;
+    overflow-y: hidden;
+    resize: none;
+    width: calc(var(--index) * 45);
+    color: white;
+    font-family: 'Sansation Light';
+    border-color: transparent;
+}
+
+
+.icon {
+    width: calc(var(--index) * 8);
+    height: calc(var(--index) * 8);
+    margin: 10px;
+}
+
+.maindiv {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.maindiv a {
+    user-select: none;
+    display: block;
+    position: fixed;
+    margin: 20px;
+    background: #ff006e;
+    border-radius: 50%;
+    padding: 5px;   
+}
+
+    .maindiv a:hover {
+        background: #FF00F5;
+        color: black;
+    }
+
+
+@media (max-width: 750px) {
+    .inputwin .submitbtn {
+        background-color: #AD00FF;
+        width: 550px;
+        height: 150px;
+    }
+    .maindiv {
+        margin-left: 30px;
+    }
+
+        .maindiv a {
+            user-select: none;
+            display: block;
+            position: fixed;
+            top: -10px;
+            left: 60px;
+        }
+
+    .maindiv textarea{
+        margin-left: 30px;
+        font-size: 10px;
+    }
+        .maindiv h2 {
+            font-size: 20px;
+        }
+}
+
+
+.submitbtn {
+    background-color: #880000;
+    width: calc(var(--index) * 5);
+    height: calc(var(--index) * 3);
+    font-size: calc(var(--index) * 1.1);
+    border-color: transparent;
+    transition: transform 1s;
+    border-radius: 30px;
+    margin-top: 100px;
+    color: white;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .submitbtn:hover {
+        transform: scale(1.1);
+        background-color: #f00;
+        font-size: calc(var(--index) * 1.2);
+        border-color: transparent;
+        font-weight: 400;
+    }
+
+
+#success {
+    color: green;
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+
+.inputwin {
+    margin-top: -55px;
+}
+
+    .inputwin input {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: calc(var(--index) * 20);
+        border-color: transparent;
+        background-color: transparent;
+        border-bottom-color: white;
+        font-family: "Sansation Light";
+        color: white;
+    }
+
+    .inputwin label {
+        display: block;
+        text-align: center;
+    }
+
+    .inputwin input {
+        border-color: transparent;
+        background-color: transparent;
+        border-bottom-color: white;
+    }
+
+    .inputwin .styleh1 {
+        margin-bottom: 50px;
+        font-size: calc(var(--index) * 2)
+    }
+
+    .inputwin .submitbtn {
+        background-color: #AD00FF;
+        width: calc(var(--index) * 10);
+        height: calc(var(--index) * 3);
+        font-size: calc(var(--index) * 1.2);
+        border-color: transparent;
+        transition: transform 1s;
+        border-radius: 30px;
+        display: block;
+        margin-top: 15px;
+    }
+
+        .inputwin .submitbtn:hover {
+            transform: scale(1.1);
+            background-color: #FF00F5;
+            font-size: calc(var(--index) * 1.2);
+            border-color: transparent;
+            font-weight: 400;
+        }
+
+
+    .inputwin a {
+        font-family: "Sansation Light";
+        color: white;
+        font-weight: 300;
+        display: inline-block;
+        transition: linear 0.5s;
+    }
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #f00;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
